@@ -1,0 +1,37 @@
+---
+title: "Past workshops: programs, slidedecks, and recordings"
+author: "Kaspar Rufibach"
+date: "Last change: `r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmarkdown::html_document:
+    highlight: pygments
+    number_sections: yes
+    self_contained: yes
+    toc: no
+    toc_depth: 2
+    toc_float: yes
+---
+
+```{r setup, include = FALSE, echo = FALSE}
+## load packages
+packs.html <- c("knitr", "pander", "reporttools", "dplyr", "readxl")
+for (i in 1:length(packs.html)){library(packs.html[i], character.only = TRUE)}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+## past
+path <- getwd()
+past <- as.data.frame(read_excel(paste(path, "/data/past.xlsx", sep = ""), col_types = NULL))
+```
+
+# Programs, slidedecks, and recordings of past events
+
+If a recording has been made this can be found on the page with the slidedecks.
+
+```{r, include=TRUE, echo=FALSE}
+past[, "Program"] <- paste("[X](", past[, "Program"], ")", sep = "")
+past[, "Slidedecks"] <- paste("[X](", past[, "Slidedecks"], ")", sep = "")
+past[is.na(past)] <- ""
+kable(past, align = "ccc")
+```
+

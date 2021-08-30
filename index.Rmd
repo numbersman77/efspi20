@@ -1,0 +1,24 @@
+---
+title: "EFSPI regulatory statistics workshop"
+author: "Kaspar Rufibach"
+date: "Last change: `r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmarkdown::html_document:
+    highlight: pygments
+    number_sections: yes
+    self_contained: yes
+    toc: no
+    toc_depth: 2
+    toc_float: yes
+---
+
+# Purpose of this site
+
+This site collects links and some materials for the organization of the yearly EFSPI regulatory statistics workshop.
+
+# Who to provide feedback to
+
+For feedback on this page send an email to [Kaspar Rufibach](mailto:kaspar.rufibach@roche.com).
+
+
+

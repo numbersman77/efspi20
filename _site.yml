@@ -1,0 +1,17 @@
+name: "EFSPI regulatory statistics workshop"
+output_dir: docs
+navbar:
+  title: "EFSPI regulatory statistics workshop"
+  type: inverse
+  left:
+    - text: "Speaker instructions and FAQs"
+      href: speaker.html
+    - text: "Past workshops: programs, slidedecks, recordings"
+      href: past.html
+  output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    include:
+      after_body: footer.html
+    css: styles.css
