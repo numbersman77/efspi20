@@ -12,12 +12,67 @@ output:
     toc_float: yes
 ---
 
-```{r setup, include=FALSE}
-library(knitr)
+# Introduction
+
+You have agreed to contribute to the EFSPI Regulatory Statistics Workshop 2021. Many thanks for that!
+
+# Scope and contact
+
+This document provides necessary information for contributors to the workshop. For any further questions please do not hesitate to reach out to one of the local organizing committee members:
+
+```{r setup, include = FALSE, echo = FALSE}
+## load packages
+packs.html <- c("knitr", "pander", "reporttools", "dplyr", "readxl")
+for (i in 1:length(packs.html)){library(packs.html[i], character.only = TRUE)}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+## past
+path <- getwd()
+local <- as.data.frame(read_excel(paste(path, "/data/local.xlsx", sep = ""), col_types = NULL))
 ```
 
-# 
+```{r, include=TRUE, echo=FALSE}
+local[, "email"] <- paste("[", local[, "Name"], "](mailto:", local[, "email"], ")", sep = "")
+kable(local[, c("Name", "email")], align = "ll")
+```
 
-# References
+# Registration
+
+Speakers and session chairs have all been registered by the local organizing committee.
+
+# Program
+
+[program](https://www.efspi.org/Documents/Events/Events%202021/6th%20EFSPI%20RegStat%20Workshop%20program.pdf)
+
+# Benefits
+
+As a premise note that EFSPI is non-profit making and as a principle does not pay an honorarium. 
+
+Participation of scientific committee members, speakers & panel discussants, colleagues at regulatory agencies, and students is for free.
+
+# Posting of presentations on EFSPI webpage
+
+After the workshop, we would like to post presentation slide decks and recordings of the webinars to the EFSPI webpage (see [here](https://www.efspi.org/EFSPI/Events/Regulatory_Meetings/5th_efspi_workshop_on_regulatory_statistics.aspx) for the 2020 issue). Please let us know in case you would prefer NOT to post your slides and/or the recording to the EFSPI webpage.
+
+# Recording
+
+If possible we would like to record the session and post it on the EFSPI webpage (see [here](https://www.efspi.org/EFSPI/Events/Regulatory_Meetings/5th_efspi_workshop_on_regulatory_statistics.aspx) for the 2020 issue). Please do let us know in case you would prefer NOT to be recorded. If $\ge 1$ contributor opts out of recording we will not record the entire session.
+
+# Slidedecks
+
+We would be very grateful to receive a stable draft of your presentation slidedeck by 6th September 2021. This, in order to be flexible and to potentially run the slides from our end in case of issues with the internet connection.
+
+# Technical setup and how we plan to run the sessions
+
+- The webinar tool that we will use is Zoom. The dial-in details will be added to the invite (which is already in your calendar) in due time.
+- Preference is to run the slides centrally by the chairs. However, speakers can opt to drive the slides themselves. If you prefer to do so please familiarize yourself with Zoom and your own setup such that transitions from one speaker to the next can be made efficiently.
+- We will invite attendees to ask questions in the Zoom chat. Every attendee can see them. The chairs will structure them and ask them in the panel discussion.
+- Chairs will decide whether to ask questions directly after the presentations or to hold them until the panel discussion.
+
+# Questions?
+
+Email your session chairs or [Kaspar Rufibach](mailto:kaspar.rufibach@roche.com).
+
 
 

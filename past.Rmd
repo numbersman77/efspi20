@@ -32,6 +32,7 @@ If a recording has been made this can be found on the page with the slidedecks.
 past[, "Program"] <- paste("[X](", past[, "Program"], ")", sep = "")
 past[, "Slidedecks"] <- paste("[X](", past[, "Slidedecks"], ")", sep = "")
 past[is.na(past)] <- ""
+past[6, 3] <- ""
 kable(past, align = "ccc")
 ```
 
