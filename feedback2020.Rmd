@@ -31,7 +31,7 @@ path <- paste(getwd(), "/", sep = "")
 ## =================================================================
 ## input uebu data
 ## =================================================================
-suppressWarnings(feedback <- as.data.frame(read_excel(paste(path, "data/EFSPI regulatory statistic webinars 2020 - feedback.xlsx", sep = ""), 
+suppressWarnings(feedback <- as.data.frame(read_excel(paste(path, "data/2020/EFSPI regulatory statistic webinars 2020 - feedback.xlsx", sep = ""), 
                      col_types = c(rep("text", 6)
                      ))))
 

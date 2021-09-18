@@ -1,7 +1,7 @@
 ---
 title: "5th EFSPI regulatory statistics workshop: summary of feedback"
 author: "Kaspar Rufibach"
-date: '30 Aug 2021'
+date: '15 Sep 2021'
 output:
   html_document:
     keep_md: true
