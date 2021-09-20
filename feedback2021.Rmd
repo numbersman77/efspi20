@@ -4,7 +4,7 @@ author: "Kaspar Rufibach"
 date: '`r Sys.setlocale("LC_TIME", "C"); format(Sys.Date(), "%d %b %Y")`'
 output:
   html_document:
-    keep_md: true
+    keep_md: false
     toc: yes
     toc_float:
       collapsed: yes
@@ -56,28 +56,53 @@ dat <- data.frame("session" = paste("Webinar ", rep(1:d, times = unlist(lapply(l
 
 # Introduction
 
-This short document summarizes some analyses of the 6th EFSPI regulatory statistics workshop in Basel 12/13th October 2020. 
+This short document summarizes some analyses of the 6th EFSPI regulatory statistics workshop 13-15th September 2021. 
 
-# Number of participants dialing in for a given proportion of entire webinar
+# Proportion of participants dialing in for a given proportion of entire webinar
 
-```{r, echo = FALSE, fig.cap = "Number of patients staying for an at least proportion of time of a given webinar.", fig.align = "center", fig.width = 9, fig.height = 5}
-par(las = 1)
-boxplot(list(trafo(res[[1]]), trafo(res[[2]]), trafo(res[[3]], 240)), names = paste("Session ", 1:d, sep = ""), ylab = "length of stay as proportion of total webinar duration (180 or 240 minutes)")
+```{r, echo = FALSE, fig.cap = "Proportion of participants dialing in for a given proportion of entire webinar.", fig.align = "center", fig.width = 9, fig.height = 5}
+par(las = 1, mar = c(4.5, 5, 1, 1))
+boxplot(list(trafo(res[[1]]), trafo(res[[2]]), trafo(res[[3]], 240)), names = paste("Session ", 1:d, sep = ""), ylab = "length of stay as proportion of total webinar duration\n(180 or 240 minutes)")
 ```
 
 As an illustrative reading example in Webinar 1 quite precisely half of participants stayed for at least 80\% of the 180 minutes that the webinar lasted.
 
-```{r, echo = FALSE, fig.cap = "Number of patients staying for an at least proportion of time of a given webinar.", fig.align = "center", fig.width = 9, fig.height = 8}
+# Number of participants dialing in for an at least proportion of the webinar
+
+```{r, echo = FALSE, fig.cap = "Number of participants dialing in for an at least proportion of the webinar.", fig.align = "center", fig.width = 9, fig.height = 8}
 par(las = 1)
-barplot(table(dat[, 3], dat[, 1])[, 1:2], beside = TRUE, ylab = "number of participants", legend.text = levels(dat[, 3]))
+barplot(table(dat[, 3], dat[, 1])[, 1:2], beside = TRUE, ylab = "number of participants", legend.text = levels(dat[, 3]), main = "Webinar 1 & 2: duration 180 minutes")
 
 cs2 <- c(0, 60, 120, 150, 180, Inf)
 labs2 <- paste("stayed > ", cs2[1:(length(cs2) - 1)], " minutes", sep = "")
 labs2[1] <- "stayed <= 60 minutes"
-cut2 <- cut(stay, breaks = cs2, labels = labs2, include.lowest = TRUE, ordered.result = TRUE)
+cut2 <- cut(pull(res[[3]], 2), breaks = cs2, labels = labs2, include.lowest = TRUE, ordered.result = TRUE)
 par(las = 2, mar = c(10, 3, 1, 1))
 barplot(table(cut2), beside = TRUE, ylab = "number of participants", names = levels(cut2))
-title("Webinar 3")
+title("Webinar 3: duration 240 minutes")
 ```
+
+# Number of participants dialing in for an at least proportion of the webinar
+
+```{r, echo = FALSE, results = 'asis', message = FALSE}
+dat2 <- dat[dat$session != "Webinar 3", ]
+#dat2 <- as.character(dat2$stay_cut)
+dat3 <- data.frame(dat[dat$session == "Webinar 3", 1:2], "stay_cut" = cut2)
+#dat3 <- as.character(dat3$stay_cut)
+dat4 <- data.frame(rbind(dat2, dat3))
+dat4$stay_cut <- factor(dat4$stay_cut, levels = c("stayed <= 60 minutes", "stayed > 60 minutes", "stayed > 120 minutes", "stayed > 150 minutes", "stayed > 180 minutes"), ordered = TRUE)
+t1 <- table(dat4[, 3], dat4[, 1])
+
+#library(gmodels)
+#CrossTable(dat4[, 3], dat4[, 1], prop.r = FALSE, prop.t = FALSE, prop.chisq = FALSE)
+
+library(arsenal)
+tab1 <- tableby(session ~ stay_cut, data = dat4, total = FALSE, test = FALSE)
+summary(tab1)
+```
+
+In summary, we can say that about 40-50% of participants stayed for the entire duration.
+
+
 
 
